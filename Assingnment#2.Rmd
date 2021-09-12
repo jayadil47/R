@@ -1,34 +1,30 @@
 ---
-title: "Assingment#2"
+title: "Analysis of Violent Crimes in the United States"
 author: "Jay"
 date: "February 12, 2018"
 output:
+  pdf_document: default
   html_document:
     df_print: default
     theme: journal
-  pdf_document: default
 ---
 
 #A Glimplse Of Violent Crimes in the United States 
 
-In this Assignment, I have used FBI crime data for the year 2014 (Courtesy of Social Explorer), to analyze the patterns of four types of major crime in the US mainly: Murder, Rape, Robbery, and Aggravated Assault. This data is yearly published by FBI, under the Uniform Crime Reporting (UCR) Program, and has been the starting place for law enforcement executives, students of criminal justice, researchers, members of the media, and the public at large seeking information on crime in the nation. 
+In this analysis, I have used FBI crime data for the year 2014 (Courtesy of Social Explorer), to analyze the patterns of four different types of crime in the US mainly: Murder, Rape, Robbery, and Aggravated Assault. This data is yearly published by FBI, under the Uniform Crime Reporting (UCR) Program, and has been the starting place for law enforcement executives, students of criminal justice, researchers, members of the media, and the public at large seeking information on crime in the nation. 
 
 The program was conceived in 1929 by the International Association of Chiefs of Police to meet the need for reliable uniform crime statistics for the nation. In 1930, the FBI was tasked with collecting, publishing, and archiving those statistics The data presented in Crime in the United States reflect the Hierarchy Rule, which requires that only the most serious offense in a multiple-offense criminal incident be counted, that is why we have four serious offences included in our data set.
 
-#SOURCE: (https://ucr.fbi.gov/crime-in-the-u.s/2014/crime-in-the-u.s.-2014/offenses-known-to-law-enforcement/violent-crime)
-
-
-```{r echo=FALSE}
-setwd("D:/R")
-```
+#Source: (https://ucr.fbi.gov/crime-in-the-u.s/2014/crime-in-the-u.s.-2014/offenses-known-to-law-enforcement/violent-crime)
 
 # Libraries used in this Assingment:-
-```{r recho=FALSE}
+# install.packages("dplyr") Run this if not installed
+# install.packages("mosaic") Run this if not installed
+
 library(haven)
 library(dplyr)
 library(tibble)
 library(mosaic)
-```
 
 
 ```{r echo=FALSE}
@@ -58,7 +54,7 @@ glimpse(CrimeData)
 CrimeData %>%
   select(Name.of.Area, Murders, Rapes, Robberies, Aggravated.Assaults)%>%
   arrange(Name.of.Area)%>%
-  head(CrimeData, n=51L)
+  head(CrimeData, n=10L)
 ```
 
 
@@ -67,14 +63,12 @@ lowmurder_states <-filter(CrimeData, Murders < 100)
 highmurder_states <- filter(CrimeData, Murders >= 100)
 ```
 
-# VIOLENT CRIME INCIDENTS FOR FOUR SPECIFIC STATES.  
-```{r}
+# VIOLENT CRIME INCIDENTS FOR 4 SPECIFIC STATES.  
 specific_states <- filter(CrimeData, Name.of.Area == "New York" | Name.of.Area == "Florida" | Name.of.Area == "California" | Name.of.Area == "Texas" )
 specific_states %>%
     select(Name.of.Area, Total.Violent.Crimes)%>%
     arrange(desc(Total.Violent.Crimes))%>%
     head(specific_states, n=5)
-```
 
 # STATES WITH LOWEST VIOLENT CRIME INCIDENTS.
 ```{r}
